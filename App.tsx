@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { HomeScreen } from './src/screens/HomeScreen';
 import { BlogListScreen } from './src/screens/BlogListScreen';
-import { propsNavigationStack } from './src/Models';
+import { NewPost } from './src/screens/NewPost';
 
 const { Screen, Navigator} = createStackNavigator();
 
@@ -14,6 +14,7 @@ export default function App() {
       <Navigator initialRouteName='HomeScreen' screenOptions={{headerShown: false}}>
         <Screen name='Home' component={HomeScreen}/>
         <Screen name='BlogList' component={BlogListScreen} />
+        <Screen name='NewPost' component={NewPost} />
       </Navigator>
     </NavigationContainer>
   );
