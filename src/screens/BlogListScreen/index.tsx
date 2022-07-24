@@ -1,5 +1,4 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Text } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
@@ -8,6 +7,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 
 import { PostCard } from '../../components/PostCard'
 import * as C from './styles'
+import { ListContext } from '../../context/ListContext'
 
 export type TPostList = {
     userId: number;
@@ -21,18 +21,11 @@ type TNewPostPage = {
 }
 
 export const BlogListScreen = () => {
-
-    const [postList, setPostList] = useState<TPostList[]>([])
-
+    
     const navigation = useNavigation<StackNavigationProp<TNewPostPage>>();
     let barHeight = getStatusBarHeight()
-    
-    useEffect(() => {
-        axios.get<TPostList[]>('https://jsonplaceholder.typicode.com/posts')
-        .then((response) => {
-            setPostList(response.data)
-        })
-    }, [])
+
+    const { state } = useContext(ListContext)
 
     const getBlogList = (item: TPostList) => {
         return <PostCard item={item}/>
@@ -41,13 +34,13 @@ export const BlogListScreen = () => {
     return (
         <C.Container padding={barHeight}>
             <C.SearchInput placeholder='Procurar um post'></C.SearchInput>
-            <C.PostNumber>Número de Posts: {postList.length}</C.PostNumber>
+            <C.PostNumber>Número de Posts: {state.length}</C.PostNumber>
             <C.NewPostButton onPress={() => navigation.navigate('NewPost')}>
                 <Text>Adicionar novo post</Text>
             </C.NewPostButton>
             <FlatList
                 keyExtractor={user => user.id.toString()}
-                data={postList}
+                data={state}
                 renderItem={({ item }) => getBlogList(item)}
             >
             </FlatList>

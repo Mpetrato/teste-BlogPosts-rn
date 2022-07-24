@@ -37,9 +37,9 @@ export const NewPost = () => {
                 value={body}
                 onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => setBody(e.nativeEvent.text)}
             />
-            <TouchableOpacity onPress={CreateNewPost}>
-                <Text>Console</Text>
-            </TouchableOpacity>
+            <C.RegisterButton onPress={CreateNewPost}>
+                <C.RegisterButtonText>Cadastrar Post</C.RegisterButtonText>
+            </C.RegisterButton>
         </C.Container>
     )
 }
