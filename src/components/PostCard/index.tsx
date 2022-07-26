@@ -13,9 +13,10 @@ export const PostCard = ({ item }: TPostCard) => {
 
     return (
         <C.Container>
-            <C.BodyText>{item.title}</C.BodyText>
-            <C.RemoveButton>
-                <C.RemoveButtonText onPress={() => removePost(item.id)}>
+            <C.TitleText>{item.title}</C.TitleText>
+            <C.BodyText>{item.body}</C.BodyText>
+            <C.RemoveButton onPress={() => removePost(item.id)}>
+                <C.RemoveButtonText>
                     Remover
                 </C.RemoveButtonText>
             </C.RemoveButton>

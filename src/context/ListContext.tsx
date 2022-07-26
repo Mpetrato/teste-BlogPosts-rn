@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { TPostList } from "../screens/BlogListScreen";
-import { TReducerAction } from "../types/TReducerAction";
 
 type TListProvider = {
     children: ReactNode
@@ -10,8 +9,9 @@ type TListProvider = {
 type TListContext = {
     state: TPostList[];
     removePost: (id: number) => void;
-    addPost: () => void;
+    addPost: (newPost: TPostList) => void;
 }
+
 
 export const ListContext = createContext<TListContext>({} as TListContext)
 
@@ -30,9 +30,10 @@ export const ListProvider = ({ children }: TListProvider) => {
         setPostList(postList.filter(post => post.id !== id))
     }
 
-    const addPost = () => {
+    const addPost = (newPost: TPostList) => {
+        setPostList([...postList, newPost])
     }
-
+    
     return (
         <ListContext.Provider value={{ state: postList, removePost, addPost}}>
             {children}

@@ -1,12 +1,15 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { NativeSyntheticEvent, Text, TextInputChangeEventData, TouchableOpacity } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { useNavigation } from '@react-navigation/native';
 
 import * as C from './styles'
+import { ListContext } from '../../context/ListContext';
 
 export const NewPost = () => {
+
+    const {addPost} = useContext(ListContext)
 
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
@@ -15,13 +18,17 @@ export const NewPost = () => {
     let barHeight = getStatusBarHeight();
 
     const CreateNewPost = async () => {
-        let response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
-            title,
-            body,
-            userId: 1
-        })
-        console.log(response.data)
-        navigation.goBack();
+        if(title !== '' && body !== ''){
+            const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+                title,
+                body,
+                userId: Math.random() * 1000
+            })
+            addPost(response.data)
+            navigation.goBack();
+        }else {
+            alert('Preencha os campos!')
+        }
     }
 
     return (
