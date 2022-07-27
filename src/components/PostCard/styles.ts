@@ -6,10 +6,16 @@ export const Container = styled.View`
     margin: 10px;
     border-radius: 10px;
 `
+export const ContainerWrapper = styled.View`
+    margin-right: 10px;
+    flex-direction: row;
+`
 export const TitleText = styled.Text`
     color: #FFF;
     font-size: 20px;
     font-weight: bold;
+    padding-right: 20px;
+    flex: 1;
 `
 export const BodyText = styled.Text`
     color: #FFF;

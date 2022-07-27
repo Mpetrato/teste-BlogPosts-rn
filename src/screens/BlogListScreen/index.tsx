@@ -56,6 +56,7 @@ export const BlogListScreen = () => {
                 <Text>Adicionar novo post</Text>
             </C.NewPostButton>
             <FlatList
+                showsHorizontalScrollIndicator={false}
                 keyExtractor={user => user.id.toString()}
                 data={newState}
                 renderItem={({ item }) => getBlogList(item)}

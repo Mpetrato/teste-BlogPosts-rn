@@ -22,7 +22,7 @@ export const NewPost = () => {
             const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
                 title,
                 body,
-                userId: Math.random() * 1000
+                userId: 1,
             })
             addPost(response.data)
             navigation.goBack();
